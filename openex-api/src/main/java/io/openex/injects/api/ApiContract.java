@@ -51,7 +51,7 @@ public class ApiContract extends Contractor {
         // Get contract
         List<ContractElement> getInstance = contractBuilder()
                 .mandatory(textField("uri", "Uri"))
-                .optional(tupleField("headers", "Headers", ContractCardinality.One))
+                .optional(tupleField("headers", "Headers", ContractCardinality.Multiple))
                 .build();
         Contract getContract = executableContract(TYPE, isExpose(), API_GET_CONTRACT, "Rest GET", getInstance);
         return List.of(postContract, getContract);
