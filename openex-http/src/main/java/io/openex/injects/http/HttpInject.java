@@ -1,34 +1,34 @@
-package io.openex.injects.api;
+package io.openex.injects.http;
 
 import io.openex.contract.Contract;
 import io.openex.database.model.Execution;
 import io.openex.execution.ExecutableInject;
 import io.openex.execution.Injector;
-import io.openex.injects.api.model.ApiRestGet;
-import io.openex.injects.api.model.ApiRestPost;
-import io.openex.injects.api.service.ApiService;
+import io.openex.injects.http.model.HttpGetModel;
+import io.openex.injects.http.model.HttpPostModel;
+import io.openex.injects.http.service.HttpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static io.openex.database.model.ExecutionTrace.traceError;
 import static io.openex.database.model.ExecutionTrace.traceSuccess;
-import static io.openex.injects.api.ApiContract.API_GET_CONTRACT;
-import static io.openex.injects.api.ApiContract.API_POST_CONTRACT;
+import static io.openex.injects.http.HttpContract.HTTP_GET_CONTRACT;
+import static io.openex.injects.http.HttpContract.HTTP_POST_CONTRACT;
 
-@Component(ApiContract.TYPE)
-public class ApiInject extends Injector {
+@Component(HttpContract.TYPE)
+public class HttpInject extends Injector {
 
-    private ApiService apiService;
+    private HttpService apiService;
 
     @Autowired
-    public void setApiService(ApiService apiService) {
+    public void setApiService(HttpService apiService) {
         this.apiService = apiService;
     }
 
     private String processExecution(ExecutableInject injection, Contract contract) throws Exception {
         return switch (contract.getId()) {
-            case API_POST_CONTRACT -> apiService.executeRestPost(contentConvert(injection, ApiRestPost.class));
-            case API_GET_CONTRACT -> apiService.executeRestGet(contentConvert(injection, ApiRestGet.class));
+            case HTTP_POST_CONTRACT -> apiService.executeRestPost(contentConvert(injection, HttpPostModel.class));
+            case HTTP_GET_CONTRACT -> apiService.executeRestGet(contentConvert(injection, HttpGetModel.class));
             default -> throw new UnsupportedOperationException("Unknown contract " + contract.getId());
         };
     }

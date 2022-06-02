@@ -1,10 +1,10 @@
-package io.openex.injects.api;
+package io.openex.injects.http;
 
 import io.openex.contract.Contract;
 import io.openex.contract.ContractCardinality;
 import io.openex.contract.Contractor;
 import io.openex.contract.fields.ContractElement;
-import io.openex.injects.api.config.ApiConfig;
+import io.openex.injects.http.config.HttpConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,15 +17,15 @@ import static io.openex.contract.fields.ContractTextArea.textareaField;
 import static io.openex.contract.fields.ContractTuple.tupleField;
 
 @Component
-public class ApiContract extends Contractor {
-    public static final String API_POST_CONTRACT = "5948c96c-4064-4c0d-b079-51ec33f31b91";
-    public static final String API_GET_CONTRACT = "611f223d-0e95-4f5b-ad89-a09ec2be50ae";
-    public static final String TYPE = "openex_api";
+public class HttpContract extends Contractor {
+    public static final String HTTP_POST_CONTRACT = "5948c96c-4064-4c0d-b079-51ec33f31b91";
+    public static final String HTTP_GET_CONTRACT = "611f223d-0e95-4f5b-ad89-a09ec2be50ae";
+    public static final String TYPE = "openex_http";
 
-    private ApiConfig config;
+    private HttpConfig config;
 
     @Autowired
-    public void setConfig(ApiConfig config) {
+    public void setConfig(HttpConfig config) {
         this.config = config;
     }
 
@@ -47,13 +47,13 @@ public class ApiContract extends Contractor {
                 .optional(tupleField("headers", "Headers", ContractCardinality.Multiple))
                 .mandatory(textareaField("body", "Post body"))
                 .build();
-        Contract postContract = executableContract(TYPE, isExpose(), API_POST_CONTRACT, "Rest POST", postInstance);
+        Contract postContract = executableContract(TYPE, isExpose(), HTTP_POST_CONTRACT, "Http POST", postInstance);
         // Get contract
         List<ContractElement> getInstance = contractBuilder()
                 .mandatory(textField("uri", "Uri"))
                 .optional(tupleField("headers", "Headers", ContractCardinality.Multiple))
                 .build();
-        Contract getContract = executableContract(TYPE, isExpose(), API_GET_CONTRACT, "Rest GET", getInstance);
+        Contract getContract = executableContract(TYPE, isExpose(), HTTP_GET_CONTRACT, "Http GET", getInstance);
         return List.of(postContract, getContract);
     }
 }

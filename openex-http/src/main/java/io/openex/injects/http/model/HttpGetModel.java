@@ -1,23 +1,24 @@
-package io.openex.injects.api.model;
+package io.openex.injects.http.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.openex.model.PairModel;
 
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ApiRestGet {
+public class HttpGetModel {
     @JsonProperty("uri")
     private String uri;
 
     @JsonProperty("headers")
-    private List<ApiHeader> headers;
+    private List<PairModel> headers;
 
-    public ApiRestGet() {
+    public HttpGetModel() {
         // Default constructor
     }
 
-    public ApiRestGet(String uri, String body, List<ApiHeader> headers) {
+    public HttpGetModel(String uri, String body, List<PairModel> headers) {
         this.uri = uri;
         this.headers = headers;
     }
@@ -30,11 +31,11 @@ public class ApiRestGet {
         this.uri = uri;
     }
 
-    public List<ApiHeader> getHeaders() {
+    public List<PairModel> getHeaders() {
         return headers;
     }
 
-    public void setHeaders(List<ApiHeader> headers) {
+    public void setHeaders(List<PairModel> headers) {
         this.headers = headers;
     }
 }

@@ -1,12 +1,13 @@
-package io.openex.injects.api.model;
+package io.openex.injects.http.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.openex.model.PairModel;
 
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ApiRestPost {
+public class HttpPostModel {
     @JsonProperty("uri")
     private String uri;
 
@@ -14,13 +15,13 @@ public class ApiRestPost {
     private String body;
 
     @JsonProperty("headers")
-    private List<ApiHeader> headers;
+    private List<PairModel> headers;
 
-    public ApiRestPost() {
+    public HttpPostModel() {
         // Default constructor
     }
 
-    public ApiRestPost(String uri, String body, List<ApiHeader> headers) {
+    public HttpPostModel(String uri, String body, List<PairModel> headers) {
         this.uri = uri;
         this.body = body;
         this.headers = headers;
@@ -34,11 +35,11 @@ public class ApiRestPost {
         this.uri = uri;
     }
 
-    public List<ApiHeader> getHeaders() {
+    public List<PairModel> getHeaders() {
         return headers;
     }
 
-    public void setHeaders(List<ApiHeader> headers) {
+    public void setHeaders(List<PairModel> headers) {
         this.headers = headers;
     }
 

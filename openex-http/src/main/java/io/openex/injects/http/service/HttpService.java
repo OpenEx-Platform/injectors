@@ -1,7 +1,7 @@
-package io.openex.injects.api.service;
+package io.openex.injects.http.service;
 
-import io.openex.injects.api.model.ApiRestGet;
-import io.openex.injects.api.model.ApiRestPost;
+import io.openex.injects.http.model.HttpGetModel;
+import io.openex.injects.http.model.HttpPostModel;
 import org.apache.hc.client5.http.ClientProtocolException;
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.classic.methods.HttpPost;
@@ -19,9 +19,9 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 @Component
-public class ApiService {
+public class HttpService {
 
-    private static final Logger LOGGER = Logger.getLogger(ApiService.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(HttpService.class.getName());
     private final CloseableHttpClient httpclient = HttpClients.createDefault();
 
     private String executeHttp(ClassicHttpRequest request) throws IOException, ParseException {
@@ -35,7 +35,7 @@ public class ApiService {
         }
     }
 
-    public String executeRestPost(ApiRestPost post) throws IOException, ParseException {
+    public String executeRestPost(HttpPostModel post) throws IOException, ParseException {
         HttpPost httpPost = new HttpPost(post.getUri());
         post.getHeaders().forEach(apiHeader -> httpPost.setHeader(apiHeader.getKey(), apiHeader.getValue()));
         httpPost.setEntity(new StringEntity(post.getBody()));
@@ -43,7 +43,7 @@ public class ApiService {
         return executeHttp(httpPost);
     }
 
-    public String executeRestGet(ApiRestGet get) throws IOException, ParseException {
+    public String executeRestGet(HttpGetModel get) throws IOException, ParseException {
         HttpGet httpGet = new HttpGet(get.getUri());
         get.getHeaders().forEach(apiHeader -> httpGet.setHeader(apiHeader.getKey(), apiHeader.getValue()));
         LOGGER.info("Sending get request to " + get.getUri());

@@ -9,7 +9,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>openex-injector-api</artifactId>
-    <name>OpenEx generic API</name>
-    <description>OpenEx API</description>
+    <artifactId>openex-injector-http</artifactId>
+    <name>OpenEx generic HTTP</name>
+    <description>OpenEx HTTP</description>
 </project>

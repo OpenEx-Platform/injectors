@@ -74,6 +74,6 @@
         <module>openex-lade</module>
         <module>openex-mastodon</module>
         <module>openex-ovh</module>
-        <module>openex-api</module>
+        <module>openex-http</module>
     </modules>
 </project>
