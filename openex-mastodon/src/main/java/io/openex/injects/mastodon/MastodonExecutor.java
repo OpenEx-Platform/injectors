@@ -19,7 +19,7 @@ import static io.openex.database.model.ExecutionTrace.traceError;
 import static io.openex.database.model.ExecutionTrace.traceSuccess;
 
 @Component(MastodonContract.TYPE)
-public class MastodonInject extends Injector {
+public class MastodonExecutor extends Injector {
 
     private MastodonService mastodonService;
 

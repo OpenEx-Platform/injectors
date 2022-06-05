@@ -19,7 +19,7 @@ import static io.openex.database.model.ExecutionTrace.traceError;
 import static io.openex.database.model.ExecutionTrace.traceSuccess;
 
 @Component(OvhSmsContract.TYPE)
-public class OvhSmsInject extends Injector {
+public class OvhSmsExecutor extends Injector {
 
     private OvhSmsService smsService;
 

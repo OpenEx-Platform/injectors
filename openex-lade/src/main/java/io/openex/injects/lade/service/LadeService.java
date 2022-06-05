@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.NullNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.openex.contract.Contract;
+import io.openex.contract.ContractConfig;
 import io.openex.contract.ContractDef;
 import io.openex.contract.fields.ContractSelect;
 import io.openex.injects.lade.config.LadeConfig;
@@ -30,7 +31,7 @@ import static io.openex.contract.fields.ContractDependencySelect.dependencySelec
 import static io.openex.contract.fields.ContractSelect.selectFieldWithDefault;
 import static io.openex.contract.fields.ContractText.textField;
 import static io.openex.helper.StreamHelper.asStream;
-import static io.openex.injects.lade.LadeContract.TYPE;
+import static io.openex.helper.SupportedLanguage.en;
 import static java.text.MessageFormat.format;
 
 @Component
@@ -115,7 +116,7 @@ public class LadeService {
         return zones;
     }
 
-    public List<Contract> buildContracts(boolean expose) throws Exception {
+    public List<Contract> buildContracts(ContractConfig contractConfig) throws Exception {
         String token = ladeAuthentication();
         Map<String, LadeWorkzone> workzoneContract = getWorkzones();
         Map<String, String> workzoneChoices = new HashMap<>();
@@ -165,8 +166,8 @@ public class LadeService {
                         builder.optional(textField(key, name, defaultNode != null ? defaultNode.asText() : ""));
                     }
                 });
-                Contract contractInstance = executableContract(TYPE, expose,
-                        identifier, contractName, builder.build());
+                Contract contractInstance = executableContract(contractConfig,
+                        identifier, Map.of(en, contractName), builder.build());
                 contractInstance.addContext("bundle_identifier", bundleIdentifier);
                 contracts.add(contractInstance);
             }

@@ -14,7 +14,7 @@ import static io.openex.database.model.ExecutionTrace.traceError;
 import static io.openex.database.model.ExecutionTrace.traceSuccess;
 
 @Component(LadeContract.TYPE)
-public class LadeInject extends Injector {
+public class LadeExecutor extends Injector {
 
     private LadeService ladeService;
 

@@ -16,7 +16,7 @@ import static io.openex.injects.http.HttpContract.HTTP_GET_CONTRACT;
 import static io.openex.injects.http.HttpContract.HTTP_POST_CONTRACT;
 
 @Component(HttpContract.TYPE)
-public class HttpInject extends Injector {
+public class HttpExecutor extends Injector {
 
     private HttpService apiService;
 
