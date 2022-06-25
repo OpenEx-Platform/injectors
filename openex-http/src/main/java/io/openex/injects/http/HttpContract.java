@@ -54,16 +54,11 @@ public class HttpContract extends Contractor {
     public List<Contract> contracts() {
         ContractConfig contractConfig = getConfig();
         // Post contract
-        List<ContractElement> postInstance = contractBuilder()
-                .mandatory(textField("uri", "Uri"))
-                .optional(tupleField("headers", "Headers", ContractCardinality.Multiple))
-                .mandatory(textareaField("body", "Post body")).build();
-        Contract postContract = executableContract(contractConfig, HTTP_POST_CONTRACT, Map.of(en, "HTTP Request - POST"), postInstance);
+        List<ContractElement> postInstance = contractBuilder().mandatory(textField("uri", "Uri")).optional(tupleField("headers", "Headers", ContractCardinality.Multiple)).mandatory(textareaField("body", "Post body")).build();
+        Contract postContract = executableContract(contractConfig, HTTP_POST_CONTRACT, Map.of(en, "HTTP Request - POST", fr, "Requête HTTP - POST"), postInstance);
         // Get contract
-        List<ContractElement> getInstance = contractBuilder()
-                .mandatory(textField("uri", "Uri"))
-                .optional(tupleField("headers", "Headers", ContractCardinality.Multiple)).build();
-        Contract getContract = executableContract(contractConfig, HTTP_GET_CONTRACT, Map.of(en, "HTTP Request - GET"), getInstance);
+        List<ContractElement> getInstance = contractBuilder().mandatory(textField("uri", "Uri")).optional(tupleField("headers", "Headers", ContractCardinality.Multiple)).build();
+        Contract getContract = executableContract(contractConfig, HTTP_GET_CONTRACT, Map.of(en, "HTTP Request - GET", fr, "Requête HTTP - GET"), getInstance);
         return List.of(postContract, getContract);
     }
 }
