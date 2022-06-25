@@ -46,7 +46,7 @@ public class HttpContract extends Contractor {
 
     @Override
     public ContractConfig getConfig() {
-        Map<SupportedLanguage, String> labels = Map.of(en, "HTTP Call", fr, "Appel HTTP");
+        Map<SupportedLanguage, String> labels = Map.of(en, "HTTP Request", fr, "Requête HTTP");
         return new ContractConfig(TYPE, labels, "#00bcd4", "/img/http.png", isExpose());
     }
 
@@ -58,12 +58,12 @@ public class HttpContract extends Contractor {
                 .mandatory(textField("uri", "Uri"))
                 .optional(tupleField("headers", "Headers", ContractCardinality.Multiple))
                 .mandatory(textareaField("body", "Post body")).build();
-        Contract postContract = executableContract(contractConfig, HTTP_POST_CONTRACT, Map.of(en, "Http POST"), postInstance);
+        Contract postContract = executableContract(contractConfig, HTTP_POST_CONTRACT, Map.of(en, "HTTP Request - POST"), postInstance);
         // Get contract
         List<ContractElement> getInstance = contractBuilder()
                 .mandatory(textField("uri", "Uri"))
                 .optional(tupleField("headers", "Headers", ContractCardinality.Multiple)).build();
-        Contract getContract = executableContract(contractConfig, HTTP_GET_CONTRACT, Map.of(en, "Http GET"), getInstance);
+        Contract getContract = executableContract(contractConfig, HTTP_GET_CONTRACT, Map.of(en, "HTTP Request - GET"), getInstance);
         return List.of(postContract, getContract);
     }
 }
